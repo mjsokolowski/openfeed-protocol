@@ -1,0 +1,2 @@
+
+### Google protocol buffer templates.
