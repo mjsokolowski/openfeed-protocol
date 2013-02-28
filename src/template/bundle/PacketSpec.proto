@@ -7,10 +7,10 @@
  */
 
 // Non-java (C, C++, etc) package name space
-package com.barchart.proto.buf.assm;
+package org.openfeed.proto.assm;
 
 // Builder options.
-//option java_package = "com.barchart.proto.buf.assm";
+//option java_package = "org.openfeed.proto.assm";
 //option java_outer_classname = "PacketSpec";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
