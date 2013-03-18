@@ -6,24 +6,22 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Package name.
+// Non-java (C, C++, etc) package name space.
 package org.openfeed.proto.data;
 
 // Builder options.
+//option java_package = "org.openfeed.proto.data";
+//option java_outer_classname = "PacketSpec";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
 // Message descriptor.
-import "MessageSpec.proto";
-
-// Packet type for market data.
-enum PacketType {
-	DATA = 1;
-}
+import "MarketUpdateMessageSpec.proto";
+import "MarketPacketTypeSpec.proto";
 
 // Market data packet with header.
-message MarketPacket {
+message MarketUpdatePacket {
 
 	// Packet channel number.
 	// Globally unique in data feed.
@@ -41,8 +39,10 @@ message MarketPacket {
 	// Packet body type selector.
 	optional PacketType type = 4;
 
+	optional sint32 subtype = 5;
+
 	// Ordered list of messages.
-	repeated MarketMessage message = 5;
+	repeated MarketUpdateMessage message = 6;
 
 }
 
@@ -50,6 +50,6 @@ message MarketPacket {
 message MarketMessageCodec {
 
 	// Ordered list of messages.
-	repeated MarketMessage message = 5;
+	repeated MarketUpdateMessage message = 5;
 
 }

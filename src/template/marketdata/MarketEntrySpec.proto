@@ -6,13 +6,43 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Package name.
+// Non-java (C, C++, etc) package name space.
 package org.openfeed.proto.data;
 
 // Builder options.
+//option java_package = "org.openfeed.proto.data";
+//option java_outer_classname = "FieldSpec";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
+
+//
+/**
+ *
+ * head/entry contracts:
+ *
+ * actualValue = headValue + entryOffset
+ * or
+ * actualValue = entryOverride over headDefault
+ *
+ */
+//
+/**
+  * enum value wire size rules
+  *
+  * note: value in 0...127 takes 1 byte on wire
+  *
+  * note: value in 128.... takes varInt128 more bytes on wire
+  *
+  * keep most frequent values first
+  *
+  */
+//
+/**
+ * field tag wire size rules
+ *
+ * note: field number 1..15 is 1 byte tag, 16..127 is 2 byte tag
+ */
 
 // Market data entry.
 message MarketEntry {
@@ -98,9 +128,7 @@ message MarketEntry {
 		PRICE_VWAP = 123; // ICE
 
 		// FIXME
-		// ICE IsSystemPricedLeg. Update: Don't use this.
-		// All SystemPriceLegs are either SYSTEM_PRICED_CRACK_SPREAD_LEG or SYSTEM_PRICED_LEG
-		PRICE_SYSTEM = 124;
+		PRICE_SYSTEM = 124; // ICE IsSystemPricedLeg. Update: Don't use this.  All SystemPriceLegs are either SYSTEM_PRICED_CRACK_SPREAD_LEG or SYSTEM_PRICED_LEG
 		//
 		TRADE_BLOCK = 125; // ICE
 		TRADE_CANCELED = 126; // ICE

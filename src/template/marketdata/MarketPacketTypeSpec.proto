@@ -1,0 +1,22 @@
+/**
+ * Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/>
+ *
+ * All rights reserved. Licensed under the OSI BSD License.
+ *
+ * http://www.opensource.org/licenses/bsd-license.php
+ */
+
+// Non-java (C, C++, etc) package name space.
+package org.openfeed.proto.data;
+
+// Builder options.
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+
+// Packet type for market data.
+enum PacketType {
+	MARKET_UPDATE = 1;
+	MARKET_SNAPSHOT = 2;
+}

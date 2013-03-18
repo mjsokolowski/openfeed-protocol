@@ -6,37 +6,28 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Package name.
+// Non-java (C, C++, etc) package name space.
 package org.openfeed.proto.data;
 
 // Builder options.
+//option java_package = "org.openfeed.proto.data";
+//option java_outer_classname = "MessageSpec";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
 // Message fields.
-import "FieldSpec.proto";
+import "MarketEntrySpec.proto";
 
 // Market data message.
-message MarketMessage {
-
-	// Message content type.
-	enum Type {
-		UPDATE = 0; // market updates
-		SNAPSHOT = 1; // market snapshots
-	}
-
-	// Message/Entry type.
-	// All message entries are of this type.
-	optional Type type = 1;
+message MarketSnapshotMessage {
 
 	// Market GUID.
 	// Base for entries.
-	optional sint64 marketId = 2;
+	optional sint64 marketId = 1;
 
-	// Market sequence number.
-	// Base for entries.
-	optional sint64 sequence = 3;
+	// Last update sequence number included in snapshot
+	optional sint64 lastMessageSequence = 2;
 
 	// Message/Entry send time.
 	// Base for entries, millisFIX, UTC
@@ -57,5 +48,6 @@ message MarketMessage {
 	// Shared base size exponent for market entries.
 	optional sint32 sizeExponent = 8;
 
-	//
+	optional bool expectMoreEntries = 9;
+
 }

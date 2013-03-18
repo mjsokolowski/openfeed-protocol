@@ -6,16 +6,18 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Package name.
+// Non-java (C, C++, etc) package name space.
 package org.openfeed.proto.inst;
 
 // Builder options.
+//option java_package = "org.openfeed.proto.inst";
+//option java_outer_classname = "PacketSpec";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
 // Message and Field.
-import "MessageSpec.proto";
+import "InstrumentMessageSpec.proto";
 
 // Packet type for instrument.
 enum PacketType {
@@ -38,8 +40,10 @@ message InstrumentPacket {
 	// Packet body type selector.
 	optional PacketType type = 4;
 
+	optional sint32 subtype = 5;
+
 	// Ordered instrument definition list.
-	repeated InstrumentDefinition definition = 5;
+	repeated InstrumentDefinition definition = 6;
 }
 
 // Instrument definition packet without header, used as codec.

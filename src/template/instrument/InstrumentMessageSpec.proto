@@ -6,16 +6,18 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Package name.
+// Non-java (C, C++, etc) package name space.
 package org.openfeed.proto.inst;
 
 // Builder options.
+//option java_package = "org.openfeed.proto.inst";
+//option java_outer_classname = "MessageSpec";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
 // Message fields.
-import "FieldSpec.proto";
+import "InstrumentFieldSpec.proto";
 
 // Market instrument definition message.
 // FIXME renumber fields & ranges.
@@ -24,8 +26,7 @@ message InstrumentDefinition {
 	// Market id used in the data feed.
 	// Globally unique for for all vendor channels.
 	// Static, never changes.
-	// Defined by a vendor.
-	// Multiple vendors may agree to sync their id.
+	// Defined by a vendor. Multiple vendors may agree to sync.
 	optional sint64 marketId = 1;
 
 	// Instrument type as enum.
@@ -67,9 +68,7 @@ message InstrumentDefinition {
 	optional Decimal contractPointValue = 13;
 
 	// Market price display rendering parameters.
-	// Decimal vs Binary
 	optional sint32 displayBase = 16;
-	// Value of exponent in a given base.
 	optional sint32 displayExponent = 15;
 
 	// Market calendar.
@@ -81,35 +80,47 @@ message InstrumentDefinition {
 	// Date/Time instrument was updated, millisFIX, UTC
 	optional sint64 recordUpdateTime = 19;
 
+
 	// Market time zone TZ database name.
+	// Permanent. Can be resolved into timeZoneOffset for given date/time.
+	// See http://joda-time.sourceforge.net/timezones.html
 	// See http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 	optional string timeZoneName = 202;
 
 	// Ordered list of component market id for a synthetic market.
 	repeated sint64 componentId = 21;
 
-	// Identifies a logical grouping of instruments.
-	// By product, for example.
+	// Identifies a logical grouping of instruments. By product, for example.
 	optional string instrumentGroup = 22;
 
-	// The Date of expiration for futures and options.
-	// For symbology purposes, not lifecycle.
+	// The Date of expiration for futures and options.  For symbology purposes, not lifecycle.
 	optional SymbolExpiration symbolExpiration = 23;
 
-	// Market life cycle state.
+	// active: can have market state updates, can have historical data
+	// passive: can NOT have market state updates, but can have historical data
+	// normally "active" means newly listed or currently non expired markets
+	// normally "passive" means expired options, de-listed equities, etc.
 	optional State state = 24;
 
-	// Channel that updates for this instrument will appear on.
+	// The channel that updates for this instrument will appear on.
 	optional sint32 channel = 25;
 
-	// Market id of the underlying asset.
-	// Used by Futures and Options.
+	// The marketId of the underlying asset.
+	// Used by Futures and Options when the underlying instrument is defined by the vendor
 	optional sint64 underlyingMarketId = 26;
+
+	// Ordered list of underlying legs in a spread.
+	repeated SpreadLeg spreadLeg = 1000;
+
+
+
 
 	// #############################################
 
 	// Option strike price in market currency.
 	optional Decimal optionStrike = 2002;
+
+
 
 	// Option type: call vs put.
 	optional OptionType optionType = 3002;
@@ -121,9 +132,6 @@ message InstrumentDefinition {
 
 	// Spread type.
 	optional SpreadType spreadType = 2000;
-
-	// Ordered list of underlying legs in a spread.
-	repeated SpreadLeg spreadLeg = 1000;
 
 	// #############################################
 }

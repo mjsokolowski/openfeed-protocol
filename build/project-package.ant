@@ -13,9 +13,9 @@
 
 	<target name="package">
 
-		<zip destfile="${basedir}/target/document.zip" basedir="${basedir}/src/document" update="true" />
+		<zip destfile="${basedir}/target/document.zip" basedir="${basedir}/document" update="true" />
 
-		<zip destfile="${basedir}/target/template.zip" basedir="${basedir}/src/template" update="true" />
+		<zip destfile="${basedir}/target/template.zip" basedir="${basedir}/template" update="true" />
 
 	</target>
 
