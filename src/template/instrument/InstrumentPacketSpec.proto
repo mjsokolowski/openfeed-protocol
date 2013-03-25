@@ -38,17 +38,11 @@ message InstrumentPacket {
 	optional sint64 timeStamp = 3;
 
 	// Packet body type selector.
-	optional PacketType type = 4;
+	optional PacketType type = 4 [default = INSTRUMENT];
 
-	optional sint32 subtype = 5;
+	optional sint32 subtype = 5 [default = 0];
 
 	// Ordered instrument definition list.
 	repeated InstrumentDefinition definition = 6;
 }
 
-// Instrument definition packet without header, used as codec.
-message InstrumentMessageCodec {
-
-	// Ordered instrument definition list.
-	repeated InstrumentDefinition message = 5;
-}
