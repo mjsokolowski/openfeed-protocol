@@ -6,12 +6,9 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Non-java (C, C++, etc) package name space.
 package org.openfeed.proto.inst;
 
 // Builder options.
-//option java_package = "org.openfeed.proto.inst";
-//option java_outer_classname = "MessageSpec";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
@@ -112,15 +109,10 @@ message InstrumentDefinition {
 	// Ordered list of underlying legs in a spread.
 	repeated SpreadLeg spreadLeg = 1000;
 
-
-
-
 	// #############################################
 
 	// Option strike price in market currency.
 	optional Decimal optionStrike = 2002;
-
-
 
 	// Option type: call vs put.
 	optional OptionType optionType = 3002;

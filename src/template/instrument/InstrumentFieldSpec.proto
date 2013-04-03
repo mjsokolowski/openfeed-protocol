@@ -6,18 +6,12 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Non-java (C, C++, etc) package name space.
 package org.openfeed.proto.inst;
 
 // Builder options.
-//option java_package = "org.openfeed.proto.inst";
-//option java_outer_classname = "FieldSpec";
 option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
-
-// Message options descriptor.
-import "google/protobuf/descriptor.proto";
 
 // Instrument type.
 enum InstrumentType {

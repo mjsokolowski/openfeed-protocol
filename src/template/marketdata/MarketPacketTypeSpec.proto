@@ -6,7 +6,6 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Non-java (C, C++, etc) package name space.
 package org.openfeed.proto.data;
 
 // Builder options.
