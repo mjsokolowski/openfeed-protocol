@@ -54,7 +54,10 @@ message MarketEntry {
 	// Primary entry category.
 	// Keep most frequent first.
 	enum Type {
-		TRADE = 0; // a.k.a last sale; price & size (size mostly present)
+
+		// a.k.a last sale; price & size (size mostly present)
+		TRADE = 0;
+
 		BID = 1; // book side
 		ASK = 2; // book side
 		CHANGE = 3; // such as price change from previous day
@@ -69,6 +72,10 @@ message MarketEntry {
 		CUVOL = 12; // cumulative volume
 		STATUS = 13; // non price/size change; such as OPEN/CLOSE event
 		SEQUENCE = 14; //such as snapshot & update sequence synchronization index
+
+		/** Time value stored as entry size. */
+		TIME = 126;
+
 		UNKNOWN = 127;
 		// keep under 128
 	}
@@ -144,6 +151,14 @@ message MarketEntry {
 		SYSTEM_PRICED_CRACK_SPREAD_LEG = 207;
 		SYSTEM_PRICED_LEG = 208;
 		IMPLIED_SPREAD_AT_MARKET_OPEN = 209;
+
+		/** Time market opened. */
+		TIME_OPENED = 250;
+		/** Time market closed. */
+		TIME_CLOSED = 251;
+		/** Time market updated. */
+		TIME_UPDATED = 252;
+
 	}
 
 	// Entry action.
