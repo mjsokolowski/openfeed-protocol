@@ -23,8 +23,10 @@ message MarketSnapshotMessage {
 	// Base for entries.
 	optional sint64 marketId = 1;
 
+	optional sint64 sequence = 2;
+
 	// Last update sequence number included in snapshot
-	optional sint64 lastMessageSequence = 2;
+	optional sint64 lastMessageSequence = 3;
 
 	// Message/Entry send time.
 	// Base for entries, millisFIX, UTC
