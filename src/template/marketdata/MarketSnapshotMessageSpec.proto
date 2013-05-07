@@ -47,6 +47,4 @@ message MarketSnapshotMessage {
 	// Shared base size exponent for market entries.
 	optional sint32 sizeExponent = 8;
 
-	optional bool expectMoreEntries = 9;
-
 }
