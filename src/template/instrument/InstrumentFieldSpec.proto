@@ -15,13 +15,13 @@ option optimize_for = SPEED;
 
 // Instrument type.
 enum InstrumentType {
-	NO_TYPE_INST = 0;
-	FOREX_INST = 1;
-	INDEX_INST = 2;
-	EQUITY_INST = 3;
-	FUTURE_INST = 4;
-	OPTION_INST = 5;
-	SPREAD_INST = 6;
+	NO_TYPE_INSTUMENT_TYPE = 0;
+	FOREX_INSTUMENT_TYPE = 1;
+	INDEX_INSTUMENT_TYPE = 2;
+	EQUITY_INSTUMENT_TYPE = 3;
+	FUTURE_INSTUMENT_TYPE = 4;
+	OPTION_INSTUMENT_TYPE = 5;
+	SPREAD_INSTUMENT_TYPE = 6;
 }
 
 // Market depth liquidity type.
