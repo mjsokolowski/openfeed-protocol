@@ -15,7 +15,7 @@ option optimize_for = SPEED;
 
 // Instrument type.
 enum InstrumentType {
-	NO_TYPE_INSTUMENT_TYPE = 0;
+	NO_INSTUMENT_TYPE = 0;
 	FOREX_INSTUMENT_TYPE = 1;
 	INDEX_INSTUMENT_TYPE = 2;
 	EQUITY_INSTUMENT_TYPE = 3;
