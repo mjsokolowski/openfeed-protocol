@@ -39,13 +39,13 @@ enum BookLiquidity {
 // Market depth structure / implementation.
 enum BookStructure {
 	// Market without any book.
-	NO_BOOK_STRUCTURE = 0;
+	NO_STRUCTURE = 0;
 	// Book uses explicit level/index
-	PRICE_LEVEL_STRUCTURE = 1;
+	LEVEL_STRUCTURE = 1;
 	// Book uses price entry value.
-	PRICE_VALUE_STRUCTURE = 2;
+	PRICE_STRUCTURE = 2;
 	// Book uses order number.
-	ORDER_NUMBER_STRUCTURE = 3;
+	ORDER_STRUCTURE = 3;
 }
 
 // Option type.
