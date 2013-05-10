@@ -30,7 +30,7 @@ enum PacketType {
 
 }
 
-// Generic packet, ignorant of body content.
+// Packet with flexible body encoding.
 message Packet {
 
 	// Packet channel number.
@@ -39,12 +39,13 @@ message Packet {
 	// Packet sequence number inside the channel.
 	optional sint64 sequence = 2;
 
-	// Packet time stamp, millisFIX, UTC
+	// Packet time stamp, millisFIX, UTC.
 	optional sint64 timeStamp = 3;
 
-	// Packet body type selector
+	// Packet body type selector.
 	optional PacketType type = 4;
 
+	// Packet body content in PacketType format.
 	optional bytes body = 5;
 
 }
