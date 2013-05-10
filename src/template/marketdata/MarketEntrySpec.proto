@@ -6,6 +6,7 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
+// Market data name space.
 package org.openfeed.proto.data;
 
 // Builder options.

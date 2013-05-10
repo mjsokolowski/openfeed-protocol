@@ -6,6 +6,7 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
+// Instrument definition name space.
 package org.openfeed.proto.inst;
 
 // Builder options.
@@ -16,8 +17,13 @@ option optimize_for = SPEED;
 // Message and Field.
 import "InstrumentMessageSpec.proto";
 
-// Packet type for instrument.
+// Packet type for instrument definitions.
 enum PacketType {
+
+	// Invalid type, represents error condition.
+	UNKNOWN = 0;
+
+	// Packet which contains instrument definitions.
 	INSTRUMENT = 3;
 }
 
@@ -28,6 +34,7 @@ message InstrumentPacket {
 	// Globally unique in data feed.
 	optional sint32 channel = 1;
 
+	// Packet sequence number inside the channel.
 	optional sint64 sequence = 2;
 
 	// Packet send time.
@@ -37,9 +44,7 @@ message InstrumentPacket {
 	// Packet body type selector.
 	optional PacketType type = 4 [default = INSTRUMENT];
 
-	optional sint32 subtype = 5 [default = 0];
-
 	// Ordered instrument definition list.
-	repeated InstrumentDefinition definition = 6;
-}
+	repeated InstrumentDefinition definition = 5;
 
+}

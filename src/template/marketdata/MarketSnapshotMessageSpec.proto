@@ -6,6 +6,7 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
+// Market data name space.
 package org.openfeed.proto.data;
 
 // Builder options.
@@ -50,7 +51,7 @@ message MarketSnapshotMessage {
 	// Total number of MarketEntry items to expect to receive
 	// before the snapshot for this marketId can be considered complete.
 	// Entries for a given marketId may come in multiple packets and messages.
-	// Snapshot packet/message must contain only entries for a single marketId.
+	// Each snapshot packet/message must contain only entries for a single marketId.
 	optional sint32 totalExpectedEntries = 9;
 
 }

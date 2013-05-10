@@ -6,6 +6,7 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
+// Market data name space.
 package org.openfeed.proto.data;
 
 // Builder options.
@@ -13,21 +14,22 @@ option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
+// Packet descriptor.
+import "MarketPacketTypeSpec.proto";
 // Message descriptor.
 import "MarketSnapshotMessageSpec.proto";
-import "MarketPacketTypeSpec.proto";
 
-
-// Market data packet with header.
+// Market snapshot data packet with header.
 message MarketSnapshotPacket {
 
 	// Packet channel number.
-	// Globally unique in data feed.
+	// Globally unique in the data feed.
 	optional sint32 channel = 1;
 
 	// Packet sequence number inside the channel.
 	// Globally unique in the channel during the trade day.
-	// Positive, reset to 1 every trade day, on local market date change or market open event.
+	// Positive, reset to 1 every trade day.
+	// Reset happens on local market date change or market open event.
 	optional sint64 sequence = 2;
 
 	// Packet send time.
@@ -37,10 +39,7 @@ message MarketSnapshotPacket {
 	// Packet body type selector.
 	optional PacketType type = 4 [default = MARKET_SNAPSHOT];
 
-	optional sint32 subtype = 5 [default = 0];
-
-	// Ordered list of messages.
-	repeated MarketSnapshotMessage message = 6;
+	// Ordered list of snapshot messages.
+	repeated MarketSnapshotMessage message = 5;
 
 }
-

@@ -6,6 +6,7 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
+// Instrument definition name space.
 package org.openfeed.proto.inst;
 
 // Builder options.
@@ -13,7 +14,7 @@ option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
-// Message fields.
+// Message fields descriptor.
 import "InstrumentFieldSpec.proto";
 
 // Market instrument definition message.
