@@ -45,7 +45,7 @@ message SessionPacket {
 	// Packet body type selector.
 	optional PacketType type = 4 [default = SESSION];
 
-	// Ordered instrument definition list.
+	// Ordered session message list.
 	repeated SessionMessage message = 5;
 
 }
