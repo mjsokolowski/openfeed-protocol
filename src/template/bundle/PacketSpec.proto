@@ -16,28 +16,18 @@ option optimize_for = SPEED;
 // Packet type for all messages.
 enum PacketType {
 
-	MARKET_UPDATE = 1;
-	MARKET_SNAPSHOT = 2;
-	INSTRUMENT_DEFINITION = 3;
-	Session = 4;
-	MarketNews = 5;
-	CUSTOM = 6;
+	UNKNOWN = 0;
 
-	//
-	DataSubscribeRequest = 100;
-	DataSubscribeResponse = 101;
-	//
-	NewsSubscribeRequest = 102;
-	NewsSubscribeResponse = 103;
-	//
-	InstrumentRequest = 104;
-	InstrumentResponse = 105;
-	//
-	LoginRequest = 106;
-	LoginResponse = 107;
-	//
-	HeartBeat = 127;
-	//
+	MARKET_UPDATE = 1;
+
+	MARKET_SNAPSHOT = 2;
+
+	INSTRUMENT = 3;
+
+	SESSION = 4;
+
+	NEWS = 5;
+
 }
 
 // Generic packet, ignorant of body content.
@@ -55,8 +45,6 @@ message Packet {
 	// Packet body type selector
 	optional PacketType type = 4;
 
-	optional sint32 subtype = 5;
-
-	optional bytes body = 6;
+	optional bytes body = 5;
 
 }
