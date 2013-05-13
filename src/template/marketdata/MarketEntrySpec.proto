@@ -142,6 +142,7 @@ message MarketEntry {
 		// keep under 128
 
 		PRE_OPEN = 180;
+		OPEN_INTEREST = 181;
 
 		// TODO: Optimize the codes
 		BLOCK_TRADE = 200;
