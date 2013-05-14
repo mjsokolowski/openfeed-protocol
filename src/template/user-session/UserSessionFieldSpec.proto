@@ -6,8 +6,8 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Session name space.
-package org.openfeed.proto.session;
+// User Session name space.
+package org.openfeed.proto.user.session;
 
 // Builder options.
 option java_multiple_files = true;

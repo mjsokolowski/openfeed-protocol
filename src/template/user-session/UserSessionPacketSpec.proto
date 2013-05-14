@@ -1,0 +1,51 @@
+/**
+ * Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/>
+ *
+ * All rights reserved. Licensed under the OSI BSD License.
+ *
+ * http://www.opensource.org/licenses/bsd-license.php
+ */
+
+// User Session name space.
+package org.openfeed.proto.user.session;
+
+// Builder options.
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+// Message and Field.
+import "UserSessionMessageSpec.proto";
+
+// Packet type for instrument definitions.
+enum PacketType {
+
+	// Invalid type.
+	// Represents error condition.
+	UNKNOWN = 0;
+
+	// Packet which contains user session messages.
+	USER_SESSION = 5;
+}
+
+// Instrument definition packet with header.
+message UserSessionPacket {
+
+	// Packet channel number.
+	// Globally unique in data feed.
+	optional sint32 channel = 1;
+
+	// Packet sequence number inside the channel.
+	optional sint64 sequence = 2;
+
+	// Packet send time.
+	// millisFIX, UTC
+	optional sint64 timeStamp = 3;
+
+	// Packet body type selector.
+	optional PacketType type = 4 [default = USER_SESSION];
+
+	// Ordered session message list.
+	repeated UserSessionMessage message = 5;
+
+}

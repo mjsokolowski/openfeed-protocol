@@ -32,14 +32,21 @@ enum PacketType {
 	// Packet with instrument definitions.
 	INSTRUMENT = 3;
 
-	// Packet with session control messages.
-	SESSION = 4;
+	// Market feed session packet.
+	// Contains request/response messages:
+	// * instrument definitions
+	// * data feed activate/deactivate
+	// * market-state snapshots
+	FEED_SESSION = 4;
+
+	// Packet with authorization session control messages.
+	USER_SESSION = 5;
 
 	// Packet with market news snapshot/update messages.
-	NEWS = 5;
+	NEWS = 6;
 
 	// Packet with market order/trade messages.
-	TRADE = 6;
+	TRADE = 7;
 
 }
 

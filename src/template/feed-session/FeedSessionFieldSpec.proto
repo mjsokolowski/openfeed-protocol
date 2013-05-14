@@ -1,0 +1,50 @@
+/**
+ * Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/>
+ *
+ * All rights reserved. Licensed under the OSI BSD License.
+ *
+ * http://www.opensource.org/licenses/bsd-license.php
+ */
+
+// User Session name space.
+package org.openfeed.proto.feed.session;
+
+// Builder options.
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+// Feed session message types.
+enum MessageType {
+
+	// Error condition.
+	NO_MESSAGE_TYPE = 0;
+
+	// Client request for feed activation for market-id list.
+	FEED_ACTIVATE_REQUEST = 1;
+	// Server response to feed activation request.
+	FEED_ACTIVATE_RESPONSE = 2;
+
+	// Client request for feed deactivation for market-id list.
+	FEED_DEACTIVATE_REQUEST = 3;
+	// Server response to feed deactivation request.
+	FEED_DEACTIVATE_RESPONSE = 4;
+
+ 	// Client request for instrument definition.
+	INSTRUMENT_REQUEST = 5;
+	// Server response to instrument definition request.
+	INSTRUMENT_RESPONSE = 6;
+
+ 	// Client request for market state.
+	MARKET_STATE_REQUEST = 7;
+	// Server response to market state request.
+	MARKET_STATE_RESPONSE = 8;
+
+}
+
+// List of market-id.
+message MarketList {
+
+		repeated sint64 marketId = 1;
+
+}

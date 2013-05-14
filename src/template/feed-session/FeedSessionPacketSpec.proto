@@ -6,8 +6,8 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Session name space.
-package org.openfeed.proto.session;
+// User Session name space.
+package org.openfeed.proto.feed.session;
 
 // Builder options.
 option java_multiple_files = true;
@@ -15,7 +15,7 @@ option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
 // Message and Field.
-import "SessionMessageSpec.proto";
+import "FeedSessionMessageSpec.proto";
 
 // Packet type for instrument definitions.
 enum PacketType {
@@ -24,12 +24,12 @@ enum PacketType {
 	// Represents error condition.
 	UNKNOWN = 0;
 
-	// Packet which contains session messages.
-	SESSION = 4;
+	// Packet which contains user session messages.
+	FEED_SESSION = 4;
 }
 
 // Instrument definition packet with header.
-message SessionPacket {
+message UserSessionPacket {
 
 	// Packet channel number.
 	// Globally unique in data feed.
@@ -43,9 +43,9 @@ message SessionPacket {
 	optional sint64 timeStamp = 3;
 
 	// Packet body type selector.
-	optional PacketType type = 4 [default = SESSION];
+	optional PacketType type = 4 [default = FEED_SESSION];
 
 	// Ordered session message list.
-	repeated SessionMessage message = 5;
+	repeated FeedSessionMessage message = 5;
 
 }

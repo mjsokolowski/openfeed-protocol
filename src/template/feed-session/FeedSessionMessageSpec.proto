@@ -1,0 +1,65 @@
+/**
+ * Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/>
+ *
+ * All rights reserved. Licensed under the OSI BSD License.
+ *
+ * http://www.opensource.org/licenses/bsd-license.php
+ */
+
+// User Session name space.
+package org.openfeed.proto.feed.session;
+
+// Builder options.
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+// Session fields descriptor.
+import "FeedSessionFieldSpec.proto";
+message FeedSessionMessage {
+
+	// Session message type
+	optional MessageType type = 1;
+
+	// Derived messages.
+	extensions 100 to 199;
+
+}
+
+// Client request.
+message FeedActivateRequest {
+
+	extend FeedSessionMessage {
+		optional FeedActivateRequest body  = 100;
+	}
+
+	optional MarketList marketList = 1;
+
+}
+
+// Server request.
+message FeedActivateResponse {
+
+	extend FeedSessionMessage {
+		optional FeedActivateResponse body  = 101;
+	}
+
+}
+
+// Client request.
+message FeedDeactivateRequest {
+
+	extend FeedSessionMessage {
+		optional FeedDeactivateRequest body  = 103;
+	}
+
+}
+
+// Server request.
+message FeedDeactivateResponse {
+
+	extend FeedSessionMessage {
+		optional FeedDeactivateResponse  body  = 104;
+	}
+
+}

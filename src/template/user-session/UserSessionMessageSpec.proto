@@ -6,8 +6,8 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// Session name space.
-package org.openfeed.proto.session;
+// User Session name space.
+package org.openfeed.proto.user.session;
 
 // Builder options.
 option java_multiple_files = true;
@@ -15,8 +15,8 @@ option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
 // Session fields descriptor.
-import "SessionFieldSpec.proto";
+import "UserSessionFieldSpec.proto";
 
-message SessionMessage {
+message UserSessionMessage {
 
 }
