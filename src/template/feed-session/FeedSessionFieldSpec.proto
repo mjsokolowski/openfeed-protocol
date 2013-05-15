@@ -6,7 +6,7 @@
  * http://www.opensource.org/licenses/bsd-license.php
  */
 
-// User Session name space.
+// Feed session name space.
 package org.openfeed.proto.feed.session;
 
 // Builder options.
@@ -14,37 +14,89 @@ option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
-// Feed session message types.
-enum MessageType {
+// Content type for the request or response.
+enum ContentType {
 
 	// Error condition.
-	NO_MESSAGE_TYPE = 0;
+	NO_CONTENT = 0;
 
-	// Client request for feed activation for market-id list.
-	FEED_ACTIVATE_REQUEST = 1;
-	// Server response to feed activation request.
-	FEED_ACTIVATE_RESPONSE = 2;
+	// Activate feed.
+	// Start delivery of market update/snapshot packets.
+	ACTIVATE_CONTENT = 1;
 
-	// Client request for feed deactivation for market-id list.
-	FEED_DEACTIVATE_REQUEST = 3;
-	// Server response to feed deactivation request.
-	FEED_DEACTIVATE_RESPONSE = 4;
+	// Deactivate feed.
+	// Stop delivery of market update/snapshot packets.
+	DEACTIVATE_CONTENT = 2;
 
- 	// Client request for instrument definition.
-	INSTRUMENT_REQUEST = 5;
-	// Server response to instrument definition request.
-	INSTRUMENT_RESPONSE = 6;
+	// Instrument definition.
+	// Delivered as instrument packet.
+	INSTRUMENT_CONTENT = 3;
 
- 	// Client request for market state.
-	MARKET_STATE_REQUEST = 7;
-	// Server response to market state request.
-	MARKET_STATE_RESPONSE = 8;
+	// Snapshot of market-state.
+	// Delivered as market snapshot packet.
+	MARKET_STATE_CONTENT = 4;
+
+	// Current feed session state.
+	// May include filters, statistics, etc.
+	// Semantics of payload is defined by the filter.
+	// Delivered as custom data in the feed session response.
+	SESSION_STATE_CONTENT = 5;
 
 }
 
-// List of market-id.
-message MarketList {
+// Client request for feed content.
+// Request identity = (content+filter)
+// There is always a match of identity in request and response.
+message ContentRequest {
 
-		repeated sint64 marketId = 1;
+	// Content type.
+	// Used as part of identity.
+	optional ContentType type = 1;
+
+	// Content filtering.
+	// Used as part of identity.
+	// Uses OSGI filter: http://www.osgi.org/javadoc/r5/core/org/osgi/framework/Filter.html
+	// Example market filter: "(market-id=123)" and exchange filter: "(exchange-id=cme)"
+	optional string filter = 2;
+
+	// Custom request data.
+	optional bytes custom = 3;
+
+}
+
+// Server response to feed content request.
+// Response identity = (content+filter)
+// There is always a match of identity in request and response.
+message ContentResponse {
+
+	// Response result.
+	enum Result {
+
+		// Error condition.
+		UNKNOWN = 0;
+
+		// Request accepted.
+		ACCEPTED = 1;
+
+		// Request rejected.
+		REJECTED = 2;
+
+	}
+
+	// Content type.
+	// Used as part of identity.
+	optional ContentType type = 1;
+
+	// Content filtering.
+	// Used as part of identity.
+	// Uses OSGI filter: http://www.osgi.org/javadoc/r5/core/org/osgi/framework/Filter.html
+	// Example market filter: "(market-id=123)" and exchange filter: "(exchange-id=cme)"
+	optional string filter = 2;
+
+	// Custom response data.
+	optional bytes custom = 3;
+
+	// Response result.
+	optional Result result = 4;
 
 }

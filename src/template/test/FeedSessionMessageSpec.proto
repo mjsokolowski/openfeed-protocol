@@ -17,12 +17,35 @@ option optimize_for = SPEED;
 // Session fields descriptor.
 import "FeedSessionFieldSpec.proto";
 
-// Symmetric session message.
-// Message type/processing is implicit in the presence of request/response.
+// Session message (asymmetric).
 message FeedSessionMessage {
+
+	// Session message type
+	optional MessageType type = 1;
+
+	// Derived message body index.
+	extensions 100 to 199;
+
+}
+
+// Client request message.
+message FeedSessionRequest {
+
+	extend FeedSessionMessage {
+		optional FeedSessionRequest body  = 101;
+	}
 
 	repeated ContentRequest request = 1;
 
-	repeated ContentResponse response = 2;
+}
+
+// Server response message.
+message FeedSessionResponse {
+
+	extend FeedSessionMessage {
+		optional FeedSessionResponse body  = 102;
+	}
+
+	repeated ContentResponse response = 1;
 
 }

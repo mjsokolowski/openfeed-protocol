@@ -1,0 +1,93 @@
+/**
+ * Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/>
+ *
+ * All rights reserved. Licensed under the OSI BSD License.
+ *
+ * http://www.opensource.org/licenses/bsd-license.php
+ */
+
+// Feed session name space.
+package org.openfeed.proto.feed.session;
+
+// Builder options.
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+// Feed session message types.
+enum MessageType {
+
+	// Error condition.
+	NO_MESSAGE_TYPE = 0;
+
+	// Client request for feed content.
+	REQUEST_MESSAGE = 1;
+
+	// Server response to feed content request.
+	RESPONSE_MESSAGE = 2;
+
+}
+
+// Content of request/response for market-id.
+enum Content {
+
+	// Error condition.
+	NO_CONTENT = 0;
+
+	// Activate feed.
+	ACTIVATE_CONTENT = 1;
+
+	// Deactivate feed.
+	DEACTIVATE_CONTENT = 2;
+
+	// Instrument definition.
+	INSTRUMENT_CONTENT = 3;
+
+	// Snapshot of market-state.
+	MARKET_STATE_CONTENT = 4;
+
+}
+
+// Client request for feed content.
+message ContentRequest {
+
+	// Request content.
+	optional Content content = 1;
+
+	// Request for a market-id
+	optional sint64 marketId = 2;
+
+	// Request for a market-filter
+	optional string marketFilter = 3;
+
+}
+
+// Server response to feed content request.
+message ContentResponse {
+
+	enum Result {
+
+		// Error condition.
+		UNKNOWN = 0;
+
+		// Request accepted.
+		ACCEPTED = 1;
+
+		// Request rejected.
+		REJECTED = 2;
+
+	}
+
+	// Request content.
+	optional Content content = 1;
+
+	// Response for a market-id
+	optional sint64 marketId = 2;
+
+	// Response for market-filter.
+	optional string marketFilter = 3;
+
+	// Response result.
+	optional Result result = 4;
+
+}
