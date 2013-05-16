@@ -24,7 +24,7 @@ enum PacketType {
 	// Represents error condition.
 	UNKNOWN = 0;
 
-	// Packet which contains user session messages.
+	// Packet which contains feed session messages.
 	FEED_SESSION = 4;
 }
 
