@@ -18,22 +18,28 @@ option optimize_for = SPEED;
 import "MarketEntrySpec.proto";
 
 // Market entries in a snapshot message belong to a group.
-enum MarketGroup {
+enum MarketEntryGroup {
 
 	// Unspecified entry group.
 	DEFAULT = 0;
 
-	// Standard current market session.
-	SESSION_STANDARD_CURRENT = 1;
+	// Current default market session.
+	SESSION_DEFAULT_CURRENT = 1;
 
-	// Standard previous market session.
-	SESSION_STANDARD_PREVIOUS = 2;
+	// Previous default  market session.
+	SESSION_DEFAULT_PREVIOUS = 2;
 
-	// Extended current market session.
+	// Current extended market session.
 	SESSION_EXTENDED_CURRENT = 3;
 
-	// Extended previous market session.
+	// Previous extended market session.
 	SESSION_EXTENDED_PREVIOUS = 4;
+
+	// Market depth entry group.
+	BOOK_GROUP = 5;
+
+	// Cumulative volume entry group.
+	CUVOL_GROUP = 6;
 
 }
 
@@ -74,7 +80,7 @@ message MarketSnapshotMessage {
 	// Each snapshot packet/message must contain only entries for a single marketId.
 	optional sint32 totalExpectedEntries = 9;
 
-	// Logical group market entries in the message belong to.
-	optional MarketGroup group = 10;
+	// Logical group for market entries in the message.
+	optional MarketEntryGroup group = 10;
 
 }
