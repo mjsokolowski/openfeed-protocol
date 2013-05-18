@@ -17,32 +17,6 @@ option optimize_for = SPEED;
 // Message fields.
 import "MarketEntrySpec.proto";
 
-// Market entries in a snapshot message belong to a group.
-enum MarketEntryGroup {
-
-	// Unspecified entry group.
-	DEFAULT = 0;
-
-	// Market depth entry group.
-	BOOK_GROUP = 1;
-
-	// Cumulative volume entry group.
-	CUVOL_GROUP = 2;
-
-	// Current default market session.
-	SESSION_DEFAULT_CURRENT = 3;
-
-	// Previous default  market session.
-	SESSION_DEFAULT_PREVIOUS = 4;
-
-	// Current extended market session.
-	SESSION_EXTENDED_CURRENT = 5;
-
-	// Previous extended market session.
-	SESSION_EXTENDED_PREVIOUS = 6;
-
-}
-
 // Market data message.
 message MarketSnapshotMessage {
 
@@ -80,7 +54,40 @@ message MarketSnapshotMessage {
 	// Each snapshot packet/message must contain only entries for a single marketId.
 	optional sint32 totalExpectedEntries = 9;
 
+	// Market entries in a snapshot message belong to a group.
+	enum EntryGroup {
+
+		// Unspecified entry group.
+		// Message contains any MarketEntry.Type.
+		DEFAULT = 0;
+
+		// Market depth entry group.
+		// Message contains MarketEntry.Type = {BID,ASK}.
+		BOOK_GROUP = 1;
+
+		// Cumulative volume entry group.
+		// Message contains MarketEntry.Type = {CUVOL}.
+		CUVOL_GROUP = 2;
+
+		// Current default market session.
+		// Message contains MarketEntry.Type = {OPEN,HIGH,LOW,CLOSE,...}.
+		DEFAULT_CURRENT = 3;
+
+		// Previous default  market session.
+		// Message contains MarketEntry.Type = {OPEN,HIGH,LOW,CLOSE,...}.
+		DEFAULT_PREVIOUS = 4;
+
+		// Current extended market session.
+		// Message contains MarketEntry.Type = {OPEN,HIGH,LOW,CLOSE,...}.
+		EXTENDED_CURRENT = 5;
+
+		// Previous extended market session.
+		// Message contains MarketEntry.Type = {OPEN,HIGH,LOW,CLOSE,...}.
+		EXTENDED_PREVIOUS = 6;
+
+	}
+
 	// Logical group for market entries in the message.
-	optional MarketEntryGroup group = 10;
+	optional EntryGroup group = 10;
 
 }
