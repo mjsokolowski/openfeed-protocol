@@ -23,23 +23,23 @@ enum MarketEntryGroup {
 	// Unspecified entry group.
 	DEFAULT = 0;
 
-	// Current default market session.
-	SESSION_DEFAULT_CURRENT = 1;
-
-	// Previous default  market session.
-	SESSION_DEFAULT_PREVIOUS = 2;
-
-	// Current extended market session.
-	SESSION_EXTENDED_CURRENT = 3;
-
-	// Previous extended market session.
-	SESSION_EXTENDED_PREVIOUS = 4;
-
 	// Market depth entry group.
-	BOOK_GROUP = 5;
+	BOOK_GROUP = 1;
 
 	// Cumulative volume entry group.
-	CUVOL_GROUP = 6;
+	CUVOL_GROUP = 2;
+
+	// Current default market session.
+	SESSION_DEFAULT_CURRENT = 3;
+
+	// Previous default  market session.
+	SESSION_DEFAULT_PREVIOUS = 4;
+
+	// Current extended market session.
+	SESSION_EXTENDED_CURRENT = 5;
+
+	// Previous extended market session.
+	SESSION_EXTENDED_PREVIOUS = 6;
 
 }
 
