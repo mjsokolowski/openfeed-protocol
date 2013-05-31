@@ -15,7 +15,7 @@ option java_generate_equals_and_hash = true;
 option optimize_for = SPEED;
 
 // Message fields.
-import "MarketEntrySpec.proto";
+import "MarketFieldSpec.proto";
 
 // Market data message.
 message MarketUpdateMessage {
