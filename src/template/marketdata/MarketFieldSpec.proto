@@ -216,7 +216,7 @@ enum EntryGroup {
 
 	// Unspecified entry group.
 	// Message contains any MarketEntry.Type.
-	DEFAULT = 0;
+	UNKNOWN = 0;
 
 	// Entries that affect instrument definition.
 	// Message contains any MarketEntry.Type.
