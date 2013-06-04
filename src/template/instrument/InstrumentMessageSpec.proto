@@ -28,42 +28,48 @@ message InstrumentDefinition {
 	optional sint64 marketId = 1;
 
 	// Instrument type as enum.
-	optional InstrumentType instrumentType = 5;
+	optional InstrumentType instrumentType = 2;
 
 	// Market depth liquidity type.
-	optional BookLiquidity bookLiquidity = 6;
+	optional BookLiquidity bookLiquidity = 3;
 
 	// Market depth implementation type.
-	optional BookStructure bookStructure = 100;
+	optional BookStructure bookStructure = 4;
 
 	// Market book size/limit for non-finite bookStructures.
-	optional sint32 bookDepth = 7;
+	optional sint32 bookDepth = 5;
 
 	// The name of the market data vendor
-	optional string vendorId = 2;
+	optional string vendorId = 6;
 
 	// Human readable market symbol, assigned by the vendor
 	// Not necessarily unique as the vendor could assign the same symbol to different
 	// instruments, for example if the instruments trade on different exchanges.
-	optional string symbol = 3;
+	optional string symbol = 7;
 
 	// Human readable market description.
-	optional string description = 4;
+	optional string description = 8;
 
 	// Market CFI code: http://en.wikipedia.org/wiki/ISO_10962
-	optional string cfiCode = 8;
+	optional string cfiCode = 9;
 
 	// Market currency code: http://en.wikipedia.org/wiki/ISO_4217
-	optional string currencyCode = 9;
+	optional string currencyCode = 10;
 
 	// Market exchange code: http://en.wikipedia.org/wiki/ISO_10383
-	optional string exchangeCode = 10;
+	optional string exchangeCode = 11;
+
+	// Market group code: vendor-specific logical group a market belongs to.
+	// Market group membership of a given market will be dynamically updated.
+	// Example: "sp500-futures" represents all currently active SP-500 futures.
+	// Example: "sp500-options" represents all currently active options on SP-500 futures.
+	optional string marketGroupCode = 12;
 
 	// Minimum price increment in market currency.
-	optional Decimal minimumPriceIncrement = 11;
+	optional Decimal minimumPriceIncrement = 13;
 
 	// Contract point value in market currency.
-	optional Decimal contractPointValue = 13;
+	optional Decimal contractPointValue = 14;
 
 	// Market price display rendering parameters.
 	optional sint32 displayBase = 16;
