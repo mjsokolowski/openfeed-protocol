@@ -210,3 +210,40 @@ message MarketEntry {
 
 	//
 }
+
+// Market entries in a message can belong to a group.
+enum EntryGroup {
+
+	// Unspecified entry group.
+	// Message contains any MarketEntry.Type.
+	NO_GROUP = 0;
+
+	// Entries that affect instrument definition.
+	// Message contains any MarketEntry.Type.
+	INST_GROUP = 1;
+
+	// Market depth entry group.
+	// Message contains MarketEntry.Type = {BID,ASK}.
+	BOOK_GROUP = 2;
+
+	// Cumulative volume entry group.
+	// Message contains MarketEntry.Type = {CUVOL}.
+	CUVOL_GROUP = 3;
+
+	// Current default market session.
+	// Message contains MarketEntry.Type = {OPEN,HIGH,LOW,CLOSE,...}.
+	DEFAULT_CURRENT = 4;
+
+	// Previous default  market session.
+	// Message contains MarketEntry.Type = {OPEN,HIGH,LOW,CLOSE,...}.
+	DEFAULT_PREVIOUS = 5;
+
+	// Current extended market session.
+	// Message contains MarketEntry.Type = {OPEN,HIGH,LOW,CLOSE,...}.
+	EXTENDED_CURRENT = 6;
+
+	// Previous extended market session.
+	// Message contains MarketEntry.Type = {OPEN,HIGH,LOW,CLOSE,...}.
+	EXTENDED_PREVIOUS = 7;
+
+}
