@@ -92,7 +92,7 @@ message InstrumentDefinition {
 	optional string instrumentGroup = 22;
 
 	// The Date of expiration for futures and options.  For symbology purposes, not lifecycle.
-	optional SymbolExpiration symbolExpiration = 23;
+	optional DateTimeStamp symbolExpiration = 23;
 
 	// active: can have market state updates, can have historical data
 	// passive: can NOT have market state updates, but can have historical data
