@@ -13,7 +13,7 @@
 
 	<groupId>org.openfeed.proto</groupId>
 	<artifactId>openfeed-protocol</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<description>
