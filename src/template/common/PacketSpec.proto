@@ -7,7 +7,7 @@
  */
 
 // Generic elements name space.
-package org.openfeed.proto.generic;
+package org.openfeed.proto.common;
 
 // Builder options.
 option java_multiple_files = true;
@@ -47,6 +47,9 @@ enum PacketType {
 
 	// Packet with market order/trade messages.
 	TRADE = 7;
+
+	// Packet with connection heartbeat messages.
+	HEARTBEAT = 8;
 
 }
 

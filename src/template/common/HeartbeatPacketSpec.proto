@@ -1,0 +1,79 @@
+/**
+ * Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/>
+ *
+ * All rights reserved. Licensed under the OSI BSD License.
+ *
+ * http://www.opensource.org/licenses/bsd-license.php
+ */
+
+// Instrument definition name space.
+package org.openfeed.proto.common;
+
+// Builder options.
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+// Packet type for heart beats.
+enum PacketType {
+
+	// Invalid type, represents error condition.
+	UNKNOWN = 0;
+
+	// Packet with connection heart beat messages.
+	HEARTBEAT = 8;
+}
+
+// Instrument definition packet with header.
+message HeartbeatPacket {
+
+	// Packet channel number.
+	// Globally unique in data feed.
+	optional sint32 channel = 1;
+
+	// Packet sequence number inside the channel.
+	optional sint64 sequence = 2;
+
+	// Packet send time.
+	// millisFIX, UTC
+	optional sint64 timeStamp = 3;
+
+	// Packet body type selector.
+	optional PacketType type = 4 [default = HEARTBEAT];
+
+	// Heart beat message list.
+	repeated HeartbeatMessage heartbeat = 5;
+
+}
+
+// Symmetric heart beat message.
+// Message type/processing is implicit in the presence of request/response.
+message HeartbeatMessage {
+
+	optional HeartbeatRequest request = 1;
+
+	optional HeartbeatResponse response = 2;
+
+}
+
+// Client request for a heart beat.
+message HeartbeatRequest {
+
+	// Magic number request.
+	// Must be unique for a connection.
+	optional sint64 signature = 2;
+
+	// Maximum response timeout, milliseconds.
+	optional sint64 expiration = 3;
+
+
+}
+
+// Server response to a heart beat request.
+message HeartbeatResponse {
+
+	// Magic number response.
+	// Must match requested number.
+	optional sint64 signature = 2;
+
+}
