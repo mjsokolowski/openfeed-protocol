@@ -60,7 +60,7 @@ message ClientAuthorizeRequestMessage {
 
 	//Ticket-Granting-Ticket (which includes the client ID, client network address, ticket validity period, and the client/TGS session key)
 	// encrypted using the secret key of the TGS
-	optional EncryptedDomainTicket accessTicket = 2;
+	optional EncryptedDomainTicket domainTicket = 2;
 
 	// Authenticator (which is composed of the client ID and the timestamp),
 	// encrypted using the Client/TGS Session Key.
@@ -98,5 +98,28 @@ message ProviderServiceResponseMessage {
 	// the timestamp found in client's Authenticator plus 1,
 	// encrypted using the Client/Server Session Key.
 	optional EncryptedStampTicket stampTicket = 3;
+
+}
+
+// Client -> Domain renewal request
+message ClientRenewalRequestMessage {
+
+	// current domain ticket owned by the client
+	optional EncryptedDomainTicket domainTicket = 2;
+
+	// encrypted using the Client/TGS Session Key.
+	optional EncryptedStampTicket stampTicket = 3;
+
+}
+
+
+// Domain -> Client renewal response
+message DomainRenewalResponseMessage{
+
+	// Client/TGS Session Key encrypted using the secret key of the client/user.
+	optional EncryptedDomainKey domainKey = 1;
+
+	// renewed domain ticket issued by the domain
+	optional EncryptedDomainTicket domainTicket = 2;
 
 }
