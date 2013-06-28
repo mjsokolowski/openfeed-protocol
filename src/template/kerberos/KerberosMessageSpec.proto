@@ -1,0 +1,102 @@
+/**
+ * Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/>
+ *
+ * All rights reserved. Licensed under the OSI BSD License.
+ *
+ * http://www.opensource.org/licenses/bsd-license.php
+ */
+
+// Kerberos name space.
+package org.openfeed.proto.kerb;
+
+// Builder options.
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+// Message fields descriptor.
+import "KerberosFieldSpec.proto";
+
+//
+message KerberosMessage {
+}
+
+// Domain/Provider/Client error response.
+message ErrorResponseMessage {
+
+	// Error code.
+	optional sint64 code = 1;
+
+	// Human readable error explanation.
+	optional string comment = 2;
+}
+
+// Client request to Authentication Server (AS)
+message ClientAuthenticateRequestMessage {
+
+	// Account identity
+	optional DomainTicket domainTicket = 1;
+
+}
+
+// Authentication Server (AS) response to client.
+message DomainAuthenticateResponseMessage{
+
+	// Client/TGS Session Key encrypted using the secret key of the client/user.
+	optional EncryptedDomainKey domainKey = 1;
+
+	// Ticket-Granting-Ticket (which includes the client ID, client network address, ticket validity period, and the client/TGS session key)
+	// encrypted using the secret key of the TGS
+	optional EncryptedDomainTicket domainTicket = 2;
+
+}
+
+// Client request to Authentication Server (AS)
+message ClientAuthorizeRequestMessage {
+
+	// ID of the requested service provider
+	// "protocol://realm-id/service-id"
+	optional string serviceURI = 1;
+
+	//Ticket-Granting-Ticket (which includes the client ID, client network address, ticket validity period, and the client/TGS session key)
+	// encrypted using the secret key of the TGS
+	optional EncryptedDomainTicket accessTicket = 2;
+
+	// Authenticator (which is composed of the client ID and the timestamp),
+	// encrypted using the Client/TGS Session Key.
+	optional EncryptedStampTicket stampTicket = 3;
+
+}
+
+// Authentication Server (AS) response to client.
+message DomainAuthorizeResponseMessage {
+
+	// Client/Server Session Key encrypted with the Client/TGS Session Key
+	optional EncryptedProviderKey providerKey = 1;
+
+	// Client-to-server ticket (which includes the client ID, client network address, validity period and Client/Server Session Key)
+	// encrypted using the service's secret key.
+	optional EncryptedProviderTicket providerTicket = 2;
+
+}
+
+// Client request to Service Server (SS)
+message ClientServiceRequestMessage {
+
+	// the client-to-server ticket, encrypted using service's secret key
+	optional EncryptedProviderTicket providerTicket = 2;
+
+	// Authenticator, which includes the client ID, timestamp
+	// encrypted using Client/Server Session Key.
+	optional EncryptedStampTicket stampTicket = 3;
+
+}
+
+// Service Server (SS) response to client.
+message ProviderServiceResponseMessage {
+
+	// the timestamp found in client's Authenticator plus 1,
+	// encrypted using the Client/Server Session Key.
+	optional EncryptedStampTicket stampTicket = 3;
+
+}

@@ -51,6 +51,9 @@ enum PacketType {
 	// Packet with connection heartbeat messages.
 	HEARTBEAT = 8;
 
+	// Packet with kerberos token messages.
+	KERBEROS = 9;
+
 }
 
 // Generic packet with flexible body encoding.

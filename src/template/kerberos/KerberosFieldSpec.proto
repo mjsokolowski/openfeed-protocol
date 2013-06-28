@@ -1,0 +1,116 @@
+/**
+ * Copyright (C) 2011-2013 Barchart, Inc. <http://www.barchart.com/>
+ *
+ * All rights reserved. Licensed under the OSI BSD License.
+ *
+ * http://www.opensource.org/licenses/bsd-license.php
+ */
+
+// Kerberos name space.
+package org.openfeed.proto.kerb;
+
+// Builder options.
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+option optimize_for = SPEED;
+
+// Client/TGS Session Key
+message DomainKey{
+
+	//
+	optional bytes plainText = 1;
+
+}
+
+// Client/TGS Session Key
+message EncryptedDomainKey {
+
+	// encrypted using the secret key of the client/user
+	optional bytes cypherText	= 1;
+
+}
+
+// Client/Server Session Key
+message ProviderKey {
+
+	//
+	optional bytes plainText = 1;
+
+}
+
+// Client/Server Session Key
+message EncryptedProviderKey {
+
+	// encrypted with the Client/TGS Session Key
+	optional bytes cypherText	= 1;
+
+}
+
+// Ticket-Granting-Ticket (which includes the client ID, client network address,
+// ticket validity period, and the client/TGS session key)
+message DomainTicket {
+
+	// "protocol://realm-id/user-id/device-id"
+	// "kerberos://account.barchart.com/jeremy.jongsma/chrome-tablet"
+	// "kerberos-query:///?realm-id=account.barchart.com&user-id=jeremy.jongsma&device-id=chrome-tablet"
+	optional string accountURI = 1;
+
+	// Ticket expiration date and time, milliseconds UTC.
+	optional sint64 expirationTime = 2;
+
+	// Client/TGS Session Key
+	optional DomainKey domainKey = 3;
+
+}
+
+// encrypted using the secret key of the TGS.
+message EncryptedDomainTicket {
+
+	optional bytes cypherText	= 1;
+
+}
+
+
+// Client-to-server ticket (which includes the client ID, client network address, validity period and Client/Server Session Key)
+message ProviderTicket {
+
+	// "protocol://realm-id/user-id/device-id"
+	optional string accountURI = 1;
+
+	// Ticket expiration date and time, milliseconds UTC.
+	optional sint64 expirationTime = 2;
+
+	// Client/Server Session Key
+	optional ProviderKey providerKey = 3;
+
+}
+
+// Client-to-server ticket
+message EncryptedProviderTicket {
+
+	// encrypted using the service's secret key.
+	optional bytes cypherText	= 1;
+
+}
+
+// Authenticator (which is composed of the client ID and the timestamp)
+message StampTicket {
+
+	// "protocol://realm-id/user-id/device-id"
+	optional string accountURI = 1;
+
+	// Ticket generation date and time, milliseconds UTC.
+	optional sint64 timeStamp = 2;
+
+}
+
+
+// Authenticator (which is composed of the client ID and the timestamp)
+message EncryptedStampTicket {
+
+	// encrypted using the Client/TGS Session Key.
+	// or
+	// encrypted using the Client/Server Session Key
+	optional bytes cypherText	= 1;
+
+}
